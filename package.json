@@ -1,7 +1,7 @@
 {
-  "name": "minimongo",
+  "name": "@kev_nz/minimongo",
   "version": "3.3.0",
-  "description": "Client-side mongo database with server sync over http",
+  "description": "My fork of minimongo to not use jQuery, Client-side mongo database with server sync over http",
   "main": "index.js",
   "scripts": {
     "test": "testem ci",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mWater/minimongo.git"
+    "url": "https://github.com/kevnz/minimongo.git"
   },
   "keywords": [
     "mongodb",
@@ -19,12 +19,12 @@
     "WebSQL",
     "storage"
   ],
-  "author": "Clayton Grassick",
+  "author": "Kevin Isom",
   "license": "LGPLv3",
   "bugs": {
-    "url": "https://github.com/mWater/minimongo/issues"
+    "url": "https://github.com/kevnz/minimongo/issues"
   },
-  "homepage": "https://github.com/mWater/minimongo",
+  "homepage": "https://github.com/kevnz/minimongo",
   "devDependencies": {
     "browserify": "^3.29.1",
     "chai": "~1.9.0",
@@ -45,7 +45,7 @@
     "async": "^0.8.0",
     "bowser": "^0.7.1",
     "idb-wrapper": "^1.4.1",
-    "jquery": "~2.1.0",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "whatwg-fetch": "^0.9.0"
   }
 }
