@@ -1,6 +1,4 @@
-require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"minimongo":[function(require,module,exports){
-module.exports=require('1+WUYb');
-},{}],"1+WUYb":[function(require,module,exports){
+require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"Focm2+":[function(require,module,exports){
 exports.MemoryDb = require('./lib/MemoryDb');
 exports.LocalStorageDb = require('./lib/LocalStorageDb');
 exports.IndexedDb = require('./lib/IndexedDb');
@@ -9,11 +7,13 @@ exports.RemoteDb = require('./lib/RemoteDb');
 exports.HybridDb = require('./lib/HybridDb');
 exports.utils = require('./lib/utils');
 
-},{"./lib/HybridDb":6,"./lib/IndexedDb":7,"./lib/LocalStorageDb":8,"./lib/MemoryDb":9,"./lib/RemoteDb":10,"./lib/WebSQLDb":11,"./lib/utils":14}],"dsrzUy":[function(require,module,exports){
+},{"./lib/HybridDb":6,"./lib/IndexedDb":7,"./lib/LocalStorageDb":8,"./lib/MemoryDb":9,"./lib/RemoteDb":10,"./lib/WebSQLDb":11,"./lib/utils":14}],"minimongo":[function(require,module,exports){
+module.exports=require('Focm2+');
+},{}],"jquery":[function(require,module,exports){
+module.exports=require('/nayFu');
+},{}],"/nayFu":[function(require,module,exports){
 module.exports = window.$;
 
-},{}],"jquery":[function(require,module,exports){
-module.exports=require('dsrzUy');
 },{}],5:[function(require,module,exports){
 var _ = require('lodash');
 
@@ -342,7 +342,7 @@ EJSON.clone = function (v) {
 
 module.exports = EJSON;
 
-},{"lodash":"z2coUu"}],6:[function(require,module,exports){
+},{"lodash":"nJZoxB"}],6:[function(require,module,exports){
 
 /*
 
@@ -657,7 +657,7 @@ HybridCollection = (function() {
 
 })();
 
-},{"./utils":14,"lodash":"z2coUu"}],7:[function(require,module,exports){
+},{"./utils":14,"lodash":"nJZoxB"}],7:[function(require,module,exports){
 var Collection, IDBStore, IndexedDb, async, compileSort, processFind, utils, _;
 
 _ = require('lodash');
@@ -1108,7 +1108,7 @@ Collection = (function() {
 
 })();
 
-},{"./selector":13,"./utils":14,"async":17,"idb-wrapper":20,"lodash":"z2coUu"}],8:[function(require,module,exports){
+},{"./selector":13,"./utils":14,"async":17,"idb-wrapper":20,"lodash":"nJZoxB"}],8:[function(require,module,exports){
 var Collection, LocalStorageDb, compileSort, processFind, utils, _;
 
 _ = require('lodash');
@@ -1407,7 +1407,7 @@ Collection = (function() {
 
 })();
 
-},{"./selector":13,"./utils":14,"lodash":"z2coUu"}],9:[function(require,module,exports){
+},{"./selector":13,"./utils":14,"lodash":"nJZoxB"}],9:[function(require,module,exports){
 var Collection, MemoryDb, compileSort, processFind, utils, _;
 
 _ = require('lodash');
@@ -1617,25 +1617,25 @@ Collection = (function() {
 
 })();
 
-},{"./selector":13,"./utils":14,"lodash":"z2coUu"}],10:[function(require,module,exports){
-var $, Collection, RemoteDb, async, jQueryHttpClient, utils, _;
+},{"./selector":13,"./utils":14,"lodash":"nJZoxB"}],10:[function(require,module,exports){
+var Collection, RemoteDb, async, noQueryHttpClient, utils, _;
 
 _ = require('lodash');
 
-$ = require('jquery');
-
 async = require('async');
+
+require('whatwg-fetch');
 
 utils = require('./utils');
 
-jQueryHttpClient = require('./jQueryHttpClient');
+noQueryHttpClient = require('./noQueryHttpClient');
 
 module.exports = RemoteDb = (function() {
   function RemoteDb(url, client, httpClient) {
     this.url = url;
     this.client = client;
     this.collections = {};
-    this.httpClient = httpClient || jQueryHttpClient;
+    this.httpClient = httpClient || noQueryHttpClient;
   }
 
   RemoteDb.prototype.addCollection = function(name, options, success, error) {
@@ -1813,7 +1813,7 @@ Collection = (function() {
 
 })();
 
-},{"./jQueryHttpClient":12,"./utils":14,"async":17,"jquery":"dsrzUy","lodash":"z2coUu"}],11:[function(require,module,exports){
+},{"./noQueryHttpClient":12,"./utils":14,"async":17,"lodash":"nJZoxB","whatwg-fetch":21}],11:[function(require,module,exports){
 var Collection, WebSQLDb, async, compileSort, doNothing, processFind, utils, _;
 
 _ = require('lodash');
@@ -2236,30 +2236,34 @@ Collection = (function() {
 
 })();
 
-},{"./selector":13,"./utils":14,"async":17,"lodash":"z2coUu"}],12:[function(require,module,exports){
+},{"./selector":13,"./utils":14,"async":17,"lodash":"nJZoxB"}],12:[function(require,module,exports){
 module.exports = function(method, url, params, data, success, error) {
   var fullUrl, req;
   fullUrl = url + "?" + $.param(params);
   if (method === "GET") {
-    req = $.getJSON(fullUrl);
+    req = fetch(fullUrl).then(function(response) {
+      return response.json();
+    });
   } else if (method === "DELETE") {
-    req = $.ajax(fullUrl, {
-      type: 'DELETE'
+    req = fetch(fullUrl, {
+      method: 'DELETE'
     });
   } else if (method === "POST" || method === "PATCH") {
-    req = $.ajax(fullUrl, {
-      data: JSON.stringify(data),
-      contentType: 'application/json',
-      type: method
+    req = fetch(fullUrl, {
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: method
     });
   }
-  req.done(function(response, textStatus, jqXHR) {
+  req.then(function(response, textStatus, jqXHR) {
     if (response == null) {
       console.error(("Empty response: " + fullUrl + ":" + method + " returned ") + jqXHR.responseText + " as JSON " + JSON.stringify(response));
     }
     return success(response || null);
   });
-  return req.fail(function(jqXHR, textStatus, errorThrown) {
+  return req["catch"](function(jqXHR, textStatus, errorThrown) {
     if (error) {
       return error(jqXHR);
     }
@@ -3003,7 +3007,7 @@ LocalCollection._compileSort = function (spec) {
 exports.compileDocumentSelector = compileDocumentSelector;
 exports.compileSort = LocalCollection._compileSort;
 
-},{"./EJSON":5,"lodash":"z2coUu"}],14:[function(require,module,exports){
+},{"./EJSON":5,"lodash":"nJZoxB"}],14:[function(require,module,exports){
 var async, bowser, compileDocumentSelector, compileSort, deg2rad, getDistanceFromLatLngInM, isLocalStorageSupported, pointInPolygon, processGeoIntersectsOperator, processNearOperator, _;
 
 _ = require('lodash');
@@ -3305,9 +3309,9 @@ exports.regularizeUpsert = function(docs, bases, success, error) {
   return [items, success, error];
 };
 
-},{"./HybridDb":6,"./IndexedDb":7,"./LocalStorageDb":8,"./MemoryDb":9,"./WebSQLDb":11,"./selector":13,"async":17,"bowser":18,"lodash":"z2coUu"}],"lodash":[function(require,module,exports){
-module.exports=require('z2coUu');
-},{}],"z2coUu":[function(require,module,exports){
+},{"./HybridDb":6,"./IndexedDb":7,"./LocalStorageDb":8,"./MemoryDb":9,"./WebSQLDb":11,"./selector":13,"async":17,"bowser":18,"lodash":"nJZoxB"}],"lodash":[function(require,module,exports){
+module.exports=require('nJZoxB');
+},{}],"nJZoxB":[function(require,module,exports){
 module.exports = window._;
 
 },{}],17:[function(require,module,exports){
@@ -4371,8 +4375,8 @@ module.exports = window._;
 
 }());
 
-}).call(this,require("/home/clayton/dev/mWater/minimongo/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"))
-},{"/home/clayton/dev/mWater/minimongo/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":19}],18:[function(require,module,exports){
+}).call(this,require("FWaASH"))
+},{"FWaASH":19}],18:[function(require,module,exports){
 /*!
   * Bowser - a browser detector
   * https://github.com/ded/bowser
@@ -4381,7 +4385,7 @@ module.exports = window._;
 
 !function (name, definition) {
   if (typeof module != 'undefined' && module.exports) module.exports['browser'] = definition()
-  else if (typeof define == 'function') define(definition)
+  else if (typeof define == 'function' && define.amd) define(definition)
   else this[name] = definition()
 }('bowser', function () {
   /**
@@ -4397,9 +4401,15 @@ module.exports = window._;
       return (match && match.length > 1 && match[1]) || '';
     }
 
+    function getSecondMatch(regex) {
+      var match = ua.match(regex);
+      return (match && match.length > 1 && match[2]) || '';
+    }
+
     var iosdevice = getFirstMatch(/(ipod|iphone|ipad)/i).toLowerCase()
       , likeAndroid = /like android/i.test(ua)
       , android = !likeAndroid && /android/i.test(ua)
+      , edgeVersion = getFirstMatch(/edge\/(\d+(\.\d+)?)/i)
       , versionIdentifier = getFirstMatch(/version\/(\d+(\.\d+)?)/i)
       , tablet = /tablet/i.test(ua)
       , mobile = !tablet && /[^-]mobi/i.test(ua)
@@ -4416,8 +4426,14 @@ module.exports = window._;
       result = {
         name: 'Windows Phone'
       , windowsphone: t
-      , msie: t
-      , version: getFirstMatch(/iemobile\/(\d+(\.\d+)?)/i)
+      }
+      if (edgeVersion) {
+        result.msedge = t
+        result.version = edgeVersion
+      }
+      else {
+        result.msie = t
+        result.version = getFirstMatch(/iemobile\/(\d+(\.\d+)?)/i)
       }
     }
     else if (/msie|trident/i.test(ua)) {
@@ -4425,6 +4441,13 @@ module.exports = window._;
         name: 'Internet Explorer'
       , msie: t
       , version: getFirstMatch(/(?:msie |rv:)(\d+(\.\d+)?)/i)
+      }
+    }
+    else if (/chrome.+? edge/i.test(ua)) {
+      result = {
+        name: 'Microsoft Edge'
+      , msedge: t
+      , version: edgeVersion
       }
     }
     else if (/chrome|crios|crmo/i.test(ua)) {
@@ -4523,10 +4546,15 @@ module.exports = window._;
       , version: versionIdentifier
       }
     }
-    else result = {}
+    else {
+      result = {
+        name: getFirstMatch(/^(.*)\/(.*) /),
+        version: getSecondMatch(/^(.*)\/(.*) /)
+     };
+   }
 
     // set webkit or gecko flag for browsers based on these engines
-    if (/(apple)?webkit/i.test(ua)) {
+    if (!result.msedge && /(apple)?webkit/i.test(ua)) {
       result.name = result.name || "Webkit"
       result.webkit = t
       if (!result.version && versionIdentifier) {
@@ -4539,7 +4567,7 @@ module.exports = window._;
     }
 
     // set OS flags for platforms that have multiple browsers
-    if (android || result.silk) {
+    if (!result.msedge && (android || result.silk)) {
       result.android = t
     } else if (iosdevice) {
       result[iosdevice] = t
@@ -4548,13 +4576,13 @@ module.exports = window._;
 
     // OS version extraction
     var osVersion = '';
-    if (iosdevice) {
+    if (result.windowsphone) {
+      osVersion = getFirstMatch(/windows phone (?:os)?\s?(\d+(\.\d+)*)/i);
+    } else if (iosdevice) {
       osVersion = getFirstMatch(/os (\d+([_\s]\d+)*) like mac os x/i);
       osVersion = osVersion.replace(/[_\s]/g, '.');
     } else if (android) {
       osVersion = getFirstMatch(/android[ \/-](\d+(\.\d+)*)/i);
-    } else if (result.windowsphone) {
-      osVersion = getFirstMatch(/windows phone (?:os)?\s?(\d+(\.\d+)*)/i);
     } else if (result.webos) {
       osVersion = getFirstMatch(/(?:web|hpw)os\/(\d+(\.\d+)*)/i);
     } else if (result.blackberry) {
@@ -4578,12 +4606,14 @@ module.exports = window._;
 
     // Graded Browser Support
     // http://developer.yahoo.com/yui/articles/gbs
-    if ((result.msie && result.version >= 10) ||
+    if (result.msedge ||
+        (result.msie && result.version >= 10) ||
         (result.chrome && result.version >= 20) ||
         (result.firefox && result.version >= 20.0) ||
         (result.safari && result.version >= 6) ||
         (result.opera && result.version >= 10.0) ||
-        (result.ios && result.osversion && result.osversion.split(".")[0] >= 6)
+        (result.ios && result.osversion && result.osversion.split(".")[0] >= 6) ||
+        (result.blackberry && result.version >= 10.1)
         ) {
       result.a = t;
     }
@@ -4602,6 +4632,17 @@ module.exports = window._;
 
   var bowser = detect(typeof navigator !== 'undefined' ? navigator.userAgent : '')
 
+  bowser.test = function (browserList) {
+    for (var i = 0; i < browserList.length; ++i) {
+      var browserItem = browserList[i];
+      if (typeof browserItem=== 'string') {
+        if (browserItem in bowser) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
   /*
    * Set our detect method to the main bowser object so we can
@@ -4658,6 +4699,16 @@ process.browser = true;
 process.env = {};
 process.argv = [];
 
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
 }
@@ -4673,7 +4724,7 @@ process.chdir = function (dir) {
 
 /**
  * @license IDBWrapper - A cross-browser wrapper for IndexedDB
- * Copyright (c) 2011 - 2013 Jens Arps
+ * Copyright (c) 2011 - 2015 Jens Arps
  * http://jensarps.de/
  *
  * Licensed under the MIT (X11) license
@@ -4694,6 +4745,7 @@ process.chdir = function (dir) {
   var defaultErrorHandler = function (error) {
     throw error;
   };
+  var defaultSuccessHandler = function () {};
 
   var defaults = {
     storeName: 'Store',
@@ -4713,7 +4765,7 @@ process.chdir = function (dir) {
    *
    * @constructor
    * @name IDBStore
-   * @version 1.4.1
+   * @version 1.5
    *
    * @param {Object} [kwArgs] An options object used to configure the store and
    *  set callbacks
@@ -4785,7 +4837,7 @@ process.chdir = function (dir) {
     onStoreReady && (this.onStoreReady = onStoreReady);
 
     var env = typeof window == 'object' ? window : self;
-    this.idb = env.indexedDB || env.webkitIndexedDB || env.mozIndexedDB;
+    this.idb = env.indexedDB || env.webkitIndexedDB || env.mozIndexedDB || env.shimIndexedDB;
     this.keyRange = env.IDBKeyRange || env.webkitIDBKeyRange || env.mozIDBKeyRange;
 
     this.features = {
@@ -4819,7 +4871,7 @@ process.chdir = function (dir) {
      *
      * @type String
      */
-    version: '1.4.1',
+    version: '1.5',
 
     /**
      * A reference to the IndexedDB object
@@ -4856,6 +4908,13 @@ process.chdir = function (dir) {
      * @type String
      */
     storeName: null,
+
+    /**
+     * The prefix to prepend to the store name
+     *
+     * @type String
+     */
+    storePrefix: null,
 
     /**
      * The key path
@@ -5063,10 +5122,20 @@ process.chdir = function (dir) {
     /**
      * Deletes the database used for this store if the IDB implementations
      * provides that functionality.
+     *
+     * @param {Function} [onSuccess] A callback that is called if deletion
+     *  was successful.
+     * @param {Function} [onError] A callback that is called if deletion
+     *  failed.
      */
-    deleteDatabase: function () {
+    deleteDatabase: function (onSuccess, onError) {
       if (this.idb.deleteDatabase) {
-        this.idb.deleteDatabase(this.dbName);
+        this.db.close();
+        var deleteRequest = this.idb.deleteDatabase(this.dbName);
+        deleteRequest.onsuccess = onSuccess;
+        deleteRequest.onerror = onError;
+      } else {
+        onError(new Error('Browser does not support IndexedDB deleteDatabase!'));
       }
     },
 
@@ -5113,7 +5182,7 @@ process.chdir = function (dir) {
         value = key;
       }
       onError || (onError = defaultErrorHandler);
-      onSuccess || (onSuccess = noop);
+      onSuccess || (onSuccess = defaultSuccessHandler);
 
       var hasSuccess = false,
           result = null,
@@ -5155,7 +5224,7 @@ process.chdir = function (dir) {
      */
     get: function (key, onSuccess, onError) {
       onError || (onError = defaultErrorHandler);
-      onSuccess || (onSuccess = noop);
+      onSuccess || (onSuccess = defaultSuccessHandler);
 
       var hasSuccess = false,
           result = null;
@@ -5189,7 +5258,7 @@ process.chdir = function (dir) {
      */
     remove: function (key, onSuccess, onError) {
       onError || (onError = defaultErrorHandler);
-      onSuccess || (onSuccess = noop);
+      onSuccess || (onSuccess = defaultSuccessHandler);
 
       var hasSuccess = false,
           result = null;
@@ -5225,7 +5294,7 @@ process.chdir = function (dir) {
      */
     batch: function (dataArray, onSuccess, onError) {
       onError || (onError = defaultErrorHandler);
-      onSuccess || (onSuccess = noop);
+      onSuccess || (onSuccess = defaultSuccessHandler);
 
       if(Object.prototype.toString.call(dataArray) != '[object Array]'){
         onError(new Error('dataArray argument must be of type Array.'));
@@ -5299,6 +5368,93 @@ process.chdir = function (dir) {
       });
 
       return this.batch(batchData, onSuccess, onError);
+    },
+
+    /**
+     * Like putBatch, takes an array of objects and stores them in a single
+     * transaction, but allows processing of the result values.  Returns the
+     * processed records containing the key for newly created records to the
+     * onSuccess calllback instead of only returning true or false for success.
+     * In addition, added the option for the caller to specify a key field that
+     * should be set to the newly created key.
+     *
+     * @param {Array} dataArray An array of objects to store
+     * @param {Object} [options] An object containing optional options
+     * @param {String} [options.keyField=this.keyPath] Specifies a field in the record to update
+     *  with the auto-incrementing key. Defaults to the store's keyPath.
+     * @param {Function} [onSuccess] A callback that is called if all operations
+     *  were successful.
+     * @param {Function} [onError] A callback that is called if an error
+     *  occurred during one of the operations.
+     * @returns {IDBTransaction} The transaction used for this operation.
+     *
+     */
+    upsertBatch: function (dataArray, options, onSuccess, onError) {
+      // handle `dataArray, onSuccess, onError` signature
+      if (typeof options == 'function') {
+        onSuccess = options;
+        onError = onSuccess;
+        options = {};
+      }
+
+      onError || (onError = defaultErrorHandler);
+      onSuccess || (onSuccess = defaultSuccessHandler);
+      options || (options = {});
+
+      if (Object.prototype.toString.call(dataArray) != '[object Array]') {
+        onError(new Error('dataArray argument must be of type Array.'));
+      }
+      var batchTransaction = this.db.transaction([this.storeName], this.consts.READ_WRITE);
+      batchTransaction.oncomplete = function () {
+        if (hasSuccess) {
+          onSuccess(dataArray);
+        } else {
+          onError(false);
+        }
+      };
+      batchTransaction.onabort = onError;
+      batchTransaction.onerror = onError;
+
+      var keyField = options.keyField || this.keyPath;
+      var count = dataArray.length;
+      var called = false;
+      var hasSuccess = false;
+      var index = 0; // assume success callbacks are executed in order
+
+      var onItemSuccess = function (event) {
+        var record = dataArray[index++];
+        record[keyField] = event.target.result;
+
+        count--;
+        if (count === 0 && !called) {
+          called = true;
+          hasSuccess = true;
+        }
+      };
+
+      dataArray.forEach(function (record) {
+        var key = record.key;
+
+        var onItemError = function (err) {
+          batchTransaction.abort();
+          if (!called) {
+            called = true;
+            onError(err);
+          }
+        };
+
+        var putRequest;
+        if (this.keyPath !== null) { // in-line keys
+          this._addIdPropertyIfNeeded(record);
+          putRequest = batchTransaction.objectStore(this.storeName).put(record);
+        } else { // out-of-line keys
+          putRequest = batchTransaction.objectStore(this.storeName).put(record, key);
+        }
+        putRequest.onsuccess = onItemSuccess;
+        putRequest.onerror = onItemError;
+      }, this);
+
+      return batchTransaction;
     },
 
     /**
@@ -5379,7 +5535,7 @@ process.chdir = function (dir) {
      */
     getBatch: function (keyArray, onSuccess, onError, arrayType) {
       onError || (onError = defaultErrorHandler);
-      onSuccess || (onSuccess = noop);
+      onSuccess || (onSuccess = defaultSuccessHandler);
       arrayType || (arrayType = 'sparse');
 
       if(Object.prototype.toString.call(keyArray) != '[object Array]'){
@@ -5442,7 +5598,7 @@ process.chdir = function (dir) {
      */
     getAll: function (onSuccess, onError) {
       onError || (onError = defaultErrorHandler);
-      onSuccess || (onSuccess = noop);
+      onSuccess || (onSuccess = defaultSuccessHandler);
       var getAllTransaction = this.db.transaction([this.storeName], this.consts.READ_ONLY);
       var store = getAllTransaction.objectStore(this.storeName);
       if (store.getAll) {
@@ -5535,7 +5691,7 @@ process.chdir = function (dir) {
      */
     clear: function (onSuccess, onError) {
       onError || (onError = defaultErrorHandler);
-      onSuccess || (onSuccess = noop);
+      onSuccess || (onSuccess = defaultSuccessHandler);
 
       var hasSuccess = false,
           result = null;
@@ -5681,6 +5837,10 @@ process.chdir = function (dir) {
      *  iteration has ended
      * @param {Function} [options.onError=throw] A callback to be called
      *  if an error occurred during the operation.
+     * @param {Number} [options.limit=Infinity] Limit the number of returned
+     *  results to this number
+     * @param {Number} [options.offset=0] Skip the provided number of results
+     *  in the resultset
      * @returns {IDBTransaction} The transaction used for this operation.
      */
     iterate: function (onItem, options) {
@@ -5692,7 +5852,9 @@ process.chdir = function (dir) {
         keyRange: null,
         writeAccess: false,
         onEnd: null,
-        onError: defaultErrorHandler
+        onError: defaultErrorHandler,
+        limit: Infinity,
+        offset: 0
       }, options || {});
 
       var directionType = options.order.toLowerCase() == 'desc' ? 'PREV' : 'NEXT';
@@ -5706,6 +5868,7 @@ process.chdir = function (dir) {
       if (options.index) {
         cursorTarget = cursorTarget.index(options.index);
       }
+      var recordCount = 0;
 
       cursorTransaction.oncomplete = function () {
         if (!hasSuccess) {
@@ -5726,9 +5889,19 @@ process.chdir = function (dir) {
       cursorRequest.onsuccess = function (event) {
         var cursor = event.target.result;
         if (cursor) {
-          onItem(cursor.value, cursor, cursorTransaction);
-          if (options.autoContinue) {
-            cursor['continue']();
+          if (options.offset) {
+            cursor.advance(options.offset);
+            options.offset = 0;
+          } else {
+            onItem(cursor.value, cursor, cursorTransaction);
+            recordCount++;
+            if (options.autoContinue) {
+              if (recordCount + options.offset < options.limit) {
+                cursor['continue']();
+              } else {
+                hasSuccess = true;
+              }
+            }
           }
         } else {
           hasSuccess = true;
@@ -5744,20 +5917,26 @@ process.chdir = function (dir) {
      *
      * @param {Function} onSuccess A callback to be called when the operation
      *  was successful.
-     * @param {Object} [options] An object defining specific query options
+     * @param {Object} [options] An object defining specific options
      * @param {Object} [options.index=null] An IDBIndex to operate on
      * @param {String} [options.order=ASC] The order in which to provide the
      *  results, can be 'DESC' or 'ASC'
      * @param {Boolean} [options.filterDuplicates=false] Whether to exclude
      *  duplicate matches
      * @param {Object} [options.keyRange=null] An IDBKeyRange to use
-     * @param {Function} [options.onError=throw] A callback to be called if an error
-     *  occurred during the operation.
+     * @param {Function} [options.onError=throw] A callback to be called
+     *  if an error occurred during the operation.
+     * @param {Number} [options.limit=Infinity] Limit the number of returned
+     *  results to this number
+     * @param {Number} [options.offset=0] Skip the provided number of results
+     *  in the resultset
      * @returns {IDBTransaction} The transaction used for this operation.
      */
     query: function (onSuccess, options) {
       var result = [];
       options = options || {};
+      options.autoContinue = true;
+      options.writeAccess = false;
       options.onEnd = function () {
         onSuccess(result);
       };
@@ -5868,8 +6047,7 @@ process.chdir = function (dir) {
 
   /** helpers **/
 
-  var noop = function () {
-  };
+  // TODO: Check Object.create support to get rid of this
   var empty = {};
   var mixin = function (target, source) {
     var name, s;
@@ -5887,5 +6065,337 @@ process.chdir = function (dir) {
   return IDBStore;
 
 }, this);
+
+},{}],21:[function(require,module,exports){
+(function() {
+  'use strict';
+
+  if (self.fetch) {
+    return
+  }
+
+  function normalizeName(name) {
+    if (typeof name !== 'string') {
+      name = name.toString();
+    }
+    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
+      throw new TypeError('Invalid character in header field name')
+    }
+    return name.toLowerCase()
+  }
+
+  function normalizeValue(value) {
+    if (typeof value !== 'string') {
+      value = value.toString();
+    }
+    return value
+  }
+
+  function Headers(headers) {
+    this.map = {}
+
+    if (headers instanceof Headers) {
+      headers.forEach(function(value, name) {
+        this.append(name, value)
+      }, this)
+
+    } else if (headers) {
+      Object.getOwnPropertyNames(headers).forEach(function(name) {
+        this.append(name, headers[name])
+      }, this)
+    }
+  }
+
+  Headers.prototype.append = function(name, value) {
+    name = normalizeName(name)
+    value = normalizeValue(value)
+    var list = this.map[name]
+    if (!list) {
+      list = []
+      this.map[name] = list
+    }
+    list.push(value)
+  }
+
+  Headers.prototype['delete'] = function(name) {
+    delete this.map[normalizeName(name)]
+  }
+
+  Headers.prototype.get = function(name) {
+    var values = this.map[normalizeName(name)]
+    return values ? values[0] : null
+  }
+
+  Headers.prototype.getAll = function(name) {
+    return this.map[normalizeName(name)] || []
+  }
+
+  Headers.prototype.has = function(name) {
+    return this.map.hasOwnProperty(normalizeName(name))
+  }
+
+  Headers.prototype.set = function(name, value) {
+    this.map[normalizeName(name)] = [normalizeValue(value)]
+  }
+
+  Headers.prototype.forEach = function(callback, thisArg) {
+    Object.getOwnPropertyNames(this.map).forEach(function(name) {
+      this.map[name].forEach(function(value) {
+        callback.call(thisArg, value, name, this)
+      }, this)
+    }, this)
+  }
+
+  function consumed(body) {
+    if (body.bodyUsed) {
+      return Promise.reject(new TypeError('Already read'))
+    }
+    body.bodyUsed = true
+  }
+
+  function fileReaderReady(reader) {
+    return new Promise(function(resolve, reject) {
+      reader.onload = function() {
+        resolve(reader.result)
+      }
+      reader.onerror = function() {
+        reject(reader.error)
+      }
+    })
+  }
+
+  function readBlobAsArrayBuffer(blob) {
+    var reader = new FileReader()
+    reader.readAsArrayBuffer(blob)
+    return fileReaderReady(reader)
+  }
+
+  function readBlobAsText(blob) {
+    var reader = new FileReader()
+    reader.readAsText(blob)
+    return fileReaderReady(reader)
+  }
+
+  var support = {
+    blob: 'FileReader' in self && 'Blob' in self && (function() {
+      try {
+        new Blob();
+        return true
+      } catch(e) {
+        return false
+      }
+    })(),
+    formData: 'FormData' in self
+  }
+
+  function Body() {
+    this.bodyUsed = false
+
+
+    this._initBody = function(body) {
+      this._bodyInit = body
+      if (typeof body === 'string') {
+        this._bodyText = body
+      } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
+        this._bodyBlob = body
+      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+        this._bodyFormData = body
+      } else if (!body) {
+        this._bodyText = ''
+      } else {
+        throw new Error('unsupported BodyInit type')
+      }
+    }
+
+    if (support.blob) {
+      this.blob = function() {
+        var rejected = consumed(this)
+        if (rejected) {
+          return rejected
+        }
+
+        if (this._bodyBlob) {
+          return Promise.resolve(this._bodyBlob)
+        } else if (this._bodyFormData) {
+          throw new Error('could not read FormData body as blob')
+        } else {
+          return Promise.resolve(new Blob([this._bodyText]))
+        }
+      }
+
+      this.arrayBuffer = function() {
+        return this.blob().then(readBlobAsArrayBuffer)
+      }
+
+      this.text = function() {
+        var rejected = consumed(this)
+        if (rejected) {
+          return rejected
+        }
+
+        if (this._bodyBlob) {
+          return readBlobAsText(this._bodyBlob)
+        } else if (this._bodyFormData) {
+          throw new Error('could not read FormData body as text')
+        } else {
+          return Promise.resolve(this._bodyText)
+        }
+      }
+    } else {
+      this.text = function() {
+        var rejected = consumed(this)
+        return rejected ? rejected : Promise.resolve(this._bodyText)
+      }
+    }
+
+    if (support.formData) {
+      this.formData = function() {
+        return this.text().then(decode)
+      }
+    }
+
+    this.json = function() {
+      return this.text().then(JSON.parse)
+    }
+
+    return this
+  }
+
+  // HTTP methods whose capitalization should be normalized
+  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT']
+
+  function normalizeMethod(method) {
+    var upcased = method.toUpperCase()
+    return (methods.indexOf(upcased) > -1) ? upcased : method
+  }
+
+  function Request(url, options) {
+    options = options || {}
+    this.url = url
+
+    this.credentials = options.credentials || 'omit'
+    this.headers = new Headers(options.headers)
+    this.method = normalizeMethod(options.method || 'GET')
+    this.mode = options.mode || null
+    this.referrer = null
+
+    if ((this.method === 'GET' || this.method === 'HEAD') && options.body) {
+      throw new TypeError('Body not allowed for GET or HEAD requests')
+    }
+    this._initBody(options.body)
+  }
+
+  function decode(body) {
+    var form = new FormData()
+    body.trim().split('&').forEach(function(bytes) {
+      if (bytes) {
+        var split = bytes.split('=')
+        var name = split.shift().replace(/\+/g, ' ')
+        var value = split.join('=').replace(/\+/g, ' ')
+        form.append(decodeURIComponent(name), decodeURIComponent(value))
+      }
+    })
+    return form
+  }
+
+  function headers(xhr) {
+    var head = new Headers()
+    var pairs = xhr.getAllResponseHeaders().trim().split('\n')
+    pairs.forEach(function(header) {
+      var split = header.trim().split(':')
+      var key = split.shift().trim()
+      var value = split.join(':').trim()
+      head.append(key, value)
+    })
+    return head
+  }
+
+  Body.call(Request.prototype)
+
+  function Response(bodyInit, options) {
+    if (!options) {
+      options = {}
+    }
+
+    this._initBody(bodyInit)
+    this.type = 'default'
+    this.url = null
+    this.status = options.status
+    this.ok = this.status >= 200 && this.status < 300
+    this.statusText = options.statusText
+    this.headers = options.headers instanceof Headers ? options.headers : new Headers(options.headers)
+    this.url = options.url || ''
+  }
+
+  Body.call(Response.prototype)
+
+  self.Headers = Headers;
+  self.Request = Request;
+  self.Response = Response;
+
+  self.fetch = function(input, init) {
+    // TODO: Request constructor should accept input, init
+    var request
+    if (Request.prototype.isPrototypeOf(input) && !init) {
+      request = input
+    } else {
+      request = new Request(input, init)
+    }
+
+    return new Promise(function(resolve, reject) {
+      var xhr = new XMLHttpRequest()
+
+      function responseURL() {
+        if ('responseURL' in xhr) {
+          return xhr.responseURL
+        }
+
+        // Avoid security warnings on getResponseHeader when not allowed by CORS
+        if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
+          return xhr.getResponseHeader('X-Request-URL')
+        }
+
+        return;
+      }
+
+      xhr.onload = function() {
+        var status = (xhr.status === 1223) ? 204 : xhr.status
+        if (status < 100 || status > 599) {
+          reject(new TypeError('Network request failed'))
+          return
+        }
+        var options = {
+          status: status,
+          statusText: xhr.statusText,
+          headers: headers(xhr),
+          url: responseURL()
+        }
+        var body = 'response' in xhr ? xhr.response : xhr.responseText;
+        resolve(new Response(body, options))
+      }
+
+      xhr.onerror = function() {
+        reject(new TypeError('Network request failed'))
+      }
+
+      xhr.open(request.method, request.url, true)
+
+      if (request.credentials === 'include') {
+        xhr.withCredentials = true
+      }
+
+      if ('responseType' in xhr && support.blob) {
+        xhr.responseType = 'blob'
+      }
+
+      request.headers.forEach(function(value, name) {
+        xhr.setRequestHeader(name, value)
+      })
+
+      xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit)
+    })
+  }
+  self.fetch.polyfill = true
+})();
 
 },{}]},{},[])
