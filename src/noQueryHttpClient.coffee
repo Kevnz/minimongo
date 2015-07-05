@@ -4,21 +4,26 @@ module.exports = (method, url, params, data, success, error) ->
   fullUrl = url + "?" + $.param(params)
 
   if method == "GET"
-    req = $.getJSON(fullUrl)
+    req = fetch(fullUrl)
+        .then (response) -> 
+            response.json()
   else if method == "DELETE"
-    req = $.ajax(fullUrl, { type : 'DELETE'})
+    req = fetch(fullUrl, { method : 'DELETE'})
   else if method == "POST" or method == "PATCH"
-    req = $.ajax(fullUrl, {
-      data : JSON.stringify(data),
-      contentType : 'application/json',
-      type : method})
+    req = fetch(fullUrl, {
+      body : JSON.stringify(data),
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+      method : method
+    })
 
-  req.done (response, textStatus, jqXHR) ->
+  req.then (response, textStatus, jqXHR) ->
     # Add debugging for https://github.com/mWater/minimongo/issues/16
     if not response?
       console.error("Empty response: #{fullUrl}:#{method} returned " + jqXHR.responseText + " as JSON " + JSON.stringify(response))
 
     success(response or null)
-  req.fail (jqXHR, textStatus, errorThrown) ->
+  req.catch (jqXHR, textStatus, errorThrown) ->
     if error
       error(jqXHR)

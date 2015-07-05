@@ -1,8 +1,8 @@
 _ = require 'lodash'
-$ = require 'jquery'
 async = require 'async'
+require 'whatwg-fetch'
 utils = require('./utils')
-jQueryHttpClient = require './jQueryHttpClient'
+noQueryHttpClient = require './noQueryHttpClient'
 
 module.exports = class RemoteDb
   # Url must have trailing /
@@ -10,7 +10,7 @@ module.exports = class RemoteDb
     @url = url
     @client = client
     @collections = {}
-    @httpClient = httpClient or jQueryHttpClient
+    @httpClient = httpClient or noQueryHttpClient
 
   # Can specify url of specific collection as option
   addCollection: (name, options={}, success, error) ->
